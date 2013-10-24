@@ -2,7 +2,7 @@ class Xml
 	def initialize(url, url_ext)
 		@data = String.new
 		Net::HTTP.start(url, 80) do |http|
-		@data=(http.get(url_ext).body)
+		@data = (http.get(url_ext).body)
 		end
 	end
 	def configure_database
@@ -16,19 +16,19 @@ class Xml
 		pos=0
 		@contents=Array.new
 		while @data.include? "<loc>"
-			open= @data.index("<loc>")
-			close=@data.index("</loc>",open)
-			value=@data[open+5..close-1]
-			@contents[pos]=value
+			open = @data.index("<loc>")
+			close = @data.index("</loc>",open)
+			value = @data[open+5..close-1]
+			@contents[pos] = value
 			@data[open..close] = ''if close
-			pos+=1
+			pos += 1
 			@length = pos
 		end
 	end
 	def parse_data
-		if @client!= nil
+		if @client != nil
 			begin
-				pos=0
+				pos = 0
 				for pos in (0..@length)
 					@insert = @client.query("INSERT INTO Xml (xml) VALUES ('#{ @contents[pos] }')")
 				end
