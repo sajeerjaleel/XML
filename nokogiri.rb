@@ -1,5 +1,5 @@
 =begin
-  Class for parsing XML contents to database
+  Class for parsing the XML contents to database
   'Nokogiri' gem is used to get data from xml 
   Data is passed to the database using 'mysql2'
 =end 
