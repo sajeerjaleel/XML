@@ -35,7 +35,7 @@ class Xml
 =end
   def fetch_remote_data
     @doc = @xml_doc. remove_namespaces!() 
-		@text = @doc.search('url/loc').xpath('text()')
+    @text = @doc.search('url/loc').xpath('text()')
   end
 
 =begin
@@ -44,17 +44,17 @@ class Xml
 	Insert the data into the database
 =end
   def parse_data
-		if @client != nil
-	  	begin
-	    	@text.each do |content|
-				@insert = @client.query("INSERT INTO Xml (xml) VALUES ('#{ content }')")
-	  	end
+    if @client != nil
+      begin
+        @text.each do |content|
+	@insert = @client.query("INSERT INTO Xml (xml) VALUES ('#{ content }')")
+      end
 	  	
-	  	rescue Exception=>e
-				puts e.message
-	  	ensure
-				@client.close
-	  	end
-		end
+      rescue Exception=>e
+	puts e.message
+      ensure
+	@client.close
+      end
+    end
   end
 end
