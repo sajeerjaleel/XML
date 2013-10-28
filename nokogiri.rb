@@ -34,7 +34,7 @@ class Xml
 	Fetch all datas inside the <loc> node
 =end
   def fetch_remote_data
-    @doc = @xml_doc. remove_namespaces!() 
+    @doc = @xml_doc.remove_namespaces!() 
     @text = @doc.search('url/loc').xpath('text()')
   end
 
@@ -57,4 +57,5 @@ class Xml
       end
     end
   end
+  
 end
