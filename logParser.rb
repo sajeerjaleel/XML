@@ -58,12 +58,13 @@ class LogParser
 	slowest = slowest.to_i
       end
       
-      request = "request"
       #checking plural form of request.
+      request = "request"
       if val1.to_i > 1
 	request += "s"
       end 
       print "#{ val1 } : #{ val2 } #{ request } \tSlowest-Time : #{ slowest } \tSlowest-URL : #{ @url }\n\n"
+      
       #finding slowest URL in the log.
       if slowest > @slowest_time
         @slowest_time = slowest
