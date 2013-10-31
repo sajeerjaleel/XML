@@ -11,9 +11,9 @@ class LogParser
   end
 
 =begin
-input: $file
-output : @count
-Count total request grouped by date and hour
+  input: $file
+  output : @count
+  Count total request grouped by date and hour
 =end
   def date_time 
     $file.each_line do|line|
@@ -55,9 +55,9 @@ Count total request grouped by date and hour
   end
 
 =begin
-input : nil
-output : 	@count, @url	
-Print the values
+  input : nil
+  output : @count, @url	
+  Print the values
 =end
   def statistics
     @count.each do|val1,val2|
