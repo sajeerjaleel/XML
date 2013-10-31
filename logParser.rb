@@ -27,7 +27,8 @@ class LogParser
 =begin
   input : $file
   output : slowest, @url, val1, val2
-  Find the slowest time groupd by date and then find corresponding URL
+  Find the slowest time groupd by date and then find corresponding URL.
+  Also find slowest URL inside the log.
 =end
   def date_time_url
     @slowest_time= 0
@@ -58,38 +59,25 @@ class LogParser
       end
       
       request = "request"
-      #checking plural form of request
+      #checking plural form of request.
       if val1.to_i > 1
 	request += "s"
       end 
-      print "#{ val1 } : #{val2} #{request} \tSlowest-Time : #{ slowest} \tSlowest-URL : #{ @url }\n\n"
+      print "#{ val1 } : #{ val2 } #{ request } \tSlowest-Time : #{ slowest } \tSlowest-URL : #{ @url }\n\n"
+      #finding slowest URL in the log.
       if slowest > @slowest_time
         @slowest_time = slowest
+        @slowest_url = @url
       end
     end 
-    
+    print "Slowest URL : #{ @slowest_url }\n"
   end
 
-=begin
-  input : $file, @slowest_time
-  output : @url
-  Find the slowest URL corresponding to slowest time
-=end
-  def slowest_URL	
-    #find corresponding URL 
-    @slowest_time = @slowest_time.to_s
-    $file.each_line do|line|
-      if line.include? @slowest_time
-	@slowest_url = line.match /https?:\/\/[\S]+/.to_s
-      end
-    end	
-    puts "\nSlowest URL : #{ @slowest_url }\n "
-  end
 
 end
 
 apache = LogParser.new("apache.log")
 apache.date_time
 apache.date_time_url
-apache.slowest_URL
+
 
